@@ -1,4 +1,4 @@
-import { FC, memo, useCallback, useEffect, useRef, useState } from "react";
+import { FC, memo, useEffect, useRef, useState } from "react";
 
 // types
 interface WheelComponentProps {
@@ -67,11 +67,12 @@ const WheelComponent: FC<WheelComponentProps> = memo(
     });
 
     // function for initialising the canvas as well as the wheel
-    const wheelInit = useCallback(() => {
+    const wheelInit = () => {
       initCanvas();
       wheelDraw();
-    }, []);
+    };
 
+    // canvas initialising
     const initCanvas = () => {
       const canvas = document.getElementById("canvas") as HTMLCanvasElement;
       canvasContext = canvas.getContext("2d");
