@@ -22,12 +22,12 @@ const LuckyWheel: React.FC<LuckyWheelProps> = memo(
 
     // segement data
     const segments = [
-      "500 Cashback Points",
-      "100 Cashback Points",
-      "20 Cashback Points",
-      "5 Cashback Points",
-      "10 Cashback Points",
-      "10 Cashback Points",
+      "",
+      "100 Gram Gold Bar",
+      "",
+      "500 Gram Gold Bar",
+      "",
+      "250 Gram Gold Bar",
     ];
     // segment colors
     const segColors = [
@@ -41,7 +41,7 @@ const LuckyWheel: React.FC<LuckyWheelProps> = memo(
 
     // handle the spin complete
     const onFinished = (winner: string) => {
-      setPrize(winner);
+      setPrize(remainingSpins === 1 ? "500 Gram Gold Bar" : winner);
       setIsModalOpen(true);
       if (onSpin) onSpin(); // Call the onSpin callback
       if (!speakerOff && winSound.current) {
@@ -67,7 +67,7 @@ const LuckyWheel: React.FC<LuckyWheelProps> = memo(
           segments={segments} // segemtn data
           audioStatus={speakerOff} // passing th audio state as boolean
           segColors={segColors} // passing the segment colors
-          winningSegment="" // winning segment can be used later
+          winningSegment={""} // winning segment can be used later
           onFinished={onFinished} // handle on spin complete
           onSpin={handleSpin} // Pass the handleSpin function to play the spin sound
           primaryColor="#002a74" // color for the innter circle
@@ -80,30 +80,29 @@ const LuckyWheel: React.FC<LuckyWheelProps> = memo(
         />
         {isModalOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50 p-4">
-          <div className="relative p-4 md:p-6 w-full max-w-md flex flex-col items-center rounded-lg shadow-lg backdrop-blur-sm bg-white bg-opacity-20 border border-white/30">
-            <p className="text-lg text-white font-semibold">YOU WON</p>
-            {/* handle the amount  */}
-            <p className="text-xl md:text-2xl font-bold text-[#fdbf15]">
-              {prize.split(" ")[0]}
-            </p>
-            {/* handle the text after amount */}
-            <p className="text-lg md:text-xl text-white font-semibold">
-              {prize.split(" ").slice(1).join(" ")}
-            </p>
-            {/* gif for modal */}
-            <img src={gift} alt="Gift" className="h-40 md:h-60 mt-4" />
-            <button
-              className="bg-gray-400 absolute right-4 top-3 rounded-full text-white p-1 md:p-2"
-              onClick={handleCloseModal}
-            >
-              <CrossIcon />
-            </button>
-            <button className="text-xl mt-6 border-[#1a1649] px-4 py-1 rounded-xl bg-white md:text-2xl font-bold text-[#1a1649]">
-              Claim
-            </button>
+            <div className="relative p-4 md:p-6 w-full max-w-md flex flex-col items-center rounded-lg shadow-lg backdrop-blur-sm bg-white bg-opacity-20 border border-white/30">
+              <p className="text-lg text-white font-semibold">YOU WON</p>
+              {/* handle the amount  */}
+              <p className="text-xl md:text-2xl font-bold text-[#fdbf15]">
+                {prize.split(" ")[0]}
+              </p>
+              {/* handle the text after amount */}
+              <p className="text-lg md:text-xl text-white font-semibold">
+                {prize.split(" ").slice(1).join(" ")}
+              </p>
+              {/* gif for modal */}
+              <img src={gift} alt="Gift" className="h-40 md:h-60 mt-4" />
+              <button
+                className="bg-gray-400 absolute right-4 top-3 rounded-full text-white p-1 md:p-2"
+                onClick={handleCloseModal}
+              >
+                <CrossIcon />
+              </button>
+              <button className="text-xl mt-6 border-[#1a1649] px-4 py-1 rounded-xl bg-white md:text-2xl font-bold text-[#1a1649]">
+                Claim
+              </button>
+            </div>
           </div>
-        </div>
-        
         )}
         {/* Audio elements */}
         <audio ref={spinSound} src="../../public/spin.mp3" preload="auto" />

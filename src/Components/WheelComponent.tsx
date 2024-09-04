@@ -237,7 +237,7 @@ const WheelComponent: FC<WheelComponentProps> = memo(
         ctx.restore();
 
         if (iconRef.current) {
-          const iconSize = size * 0.2; // Size of the icon (30% of the segment size)
+          const iconSize = size * 0.2; // Size of the icon (20% of the segment size)
           const iconX =
             centerX + (size / 2) * Math.cos(middleAngle) - iconSize / 2;
           const iconY =
